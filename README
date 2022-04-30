@@ -1,0 +1,46 @@
+Tema 2 ASC
+Nume: Porumb Andrei Cornel
+Grupa: 336CA
+
+Implementare:
+	1. Blas: Pentru a implementa solvr_blas am importat libraria cblas.h
+	si am folosit functiile cblas_dtrmm pentru a inmulti o matrice
+	superior triunghiulara cu o alta matrice si cblas_dgemm pentru
+	a inmulti 2 matrici si a le adauna cu a treia. Am folosit 2
+	cblas_dgemm si un cblas_dtrmm.
+
+	2. Neopt: Pentru rezolvarea neoptimizata am facut caluclele pe 
+	rand folosind inmultirea de matrici clasica(respectand faptul
+	ca matricea A este superior triunghiulara).
+
+	3. Opt_m: Pentru rezolvarea optimizata, m-am folosit de a doua
+	metoda invatata in laboraztorul 5, si anume managementul accesului
+	la memorie. Am optimizat toate cele 3 inmultiri.
+
+Grafice:
+	Am adaugat inca 2 intrari in fisierul input: 1400 si 1600.
+	Timpii obtinuti pentru fiecare implementare sunt urmatorii:
+
+	Neopt:
+		400  - 1.163798
+		800  - 9.860152
+		1200 - 32.441566
+		1400 - 54.593704
+		1600 - 98.313263
+	Opt:
+		400  - 0.581688
+                800  - 5.062603
+                1200 - 16.487602
+                1400 - 27.802525
+                1600 - 48.855003
+	Blas:
+                400  - 0.045198
+                800  - 0.338487
+                1200 - 1.123694
+                1400 - 1.735730
+                1600 - 2.652365
+	Se poate observa foarte usor cresterea eficientei implementarilor.
+	De asemenea am atasat si o imagine cu graficele (grafice.jpeg)
+	
+Consider ca tema a fost una accesibila si ca m-a ajutat sa inteleg mai bine
+cum functioneaza optimizarile.
