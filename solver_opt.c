@@ -8,12 +8,12 @@
  * Add your optimized implementation here
  */
 double* my_solver(int N, double *A, double* B) {
-	double *C = calloc(N * N, sizeof(double));
-	double *AT = calloc(N * N, sizeof(double));
-	double *BT = calloc(N * N, sizeof(double));
-	double *OP1 = calloc(N * N, sizeof(double));
-	double *OP2 = calloc(N * N, sizeof(double));
-	double *OP3 = calloc(N * N, sizeof(double));
+	double *C = (double *) calloc(N * N, sizeof(double));
+	double *AT = (double *) calloc(N * N, sizeof(double));
+	double *BT = (double *) calloc(N * N, sizeof(double));
+	double *OP1 = (double *) calloc(N * N, sizeof(double));
+	double *OP2 = (double *) calloc(N * N, sizeof(double));
+	double *OP3 = (double *) calloc(N * N, sizeof(double));
 	int i = 0;
 	int j = 0;
 	int k = 0;
@@ -49,7 +49,7 @@ double* my_solver(int N, double *A, double* B) {
 			double *pb = orig_pb;
 			double *pa = A + j;
 			register double suma = 0;
-			for (k = 0; k <= j; k++) {
+			for (k = 0; k <=j; k++) {
 				suma += *pb * *pa;
 				pb++;
 				pa += N;
@@ -61,8 +61,8 @@ double* my_solver(int N, double *A, double* B) {
 	for (i = 0; i < N; i++ ){
 		double *orig_op2 = OP2+i*N;
 		for (j = 0; j < N; j++) {
-			double *pop2 = orig_op2;
-			double *pat = AT + j;
+			double *pop2 = orig_op2 + j;
+			double *pat = AT + j*N+j;
 			register double suma = 0;
 			for (k = j; k < N; k++) {
 				suma += *pop2 * *pat;
