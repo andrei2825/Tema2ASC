@@ -36,27 +36,15 @@
  */
 double* my_solver(int N, double *A, double *B) {
 	double *C = calloc(N * N, sizeof(double));
-	double *OP1 = calloc(N * N, sizeof(double));
-	double *OP2 = calloc(N * N, sizeof(double));
-	double *OP3 = calloc(N * N, sizeof(double));
-	for(int i = 0; i < N*N; i++) {
-		OP2[i] = B[i];
-	}
-	// BT * B
-	cblas_dgemm(CblasRowMajor, CblasTrans, CblasNoTrans, N, N, N, 1.0, B, N, B, N, 1.0, OP1, N)
 
-	// B * A
-	cblas_dtrmm(CblasRowMajor, CblasLower, CblasUpper, CblasNoTrans, CblasNonUnit, N, N, 1.0, A, N, OP2, N);
+	// AT * A
+	cblas_dtrmm(CblasRowMajor,CblasRight, CblasUpper, CblasTrans, CblasNonUnit, N, N, 1.0, A, N, A, N);
+	// B * (AT * A)
+	cblas_dgemm(CblasRowMajor, CblasNoTrans, CblasNoTrans, N, N, N, 1.0, B, N, A, N, 1.0, C, N);
+	// C = C + BT * B
+	cblas_dgemm(CblasRowMajor, CblasTrans, CblasNoTrans, N, N, N, 1.0, B, N, B, N, 1.0, C, N);
 
-	// OP2 * AT
-	cblas_dtrmm(CblasRowMajor, CblasLower, CblasLower, CblasTrans, CblasNonUnit, N, N, 1.0, A, N, OP2, N);
 
-	for(i = 0; i < N*N; i++) {
-		C[i] = OP2[i];
-	}
 	printf("BLAS SOLVER\n");
-	free(OP1);
-	free(OP2);
-	free(OP3);
 	return C;
 }
